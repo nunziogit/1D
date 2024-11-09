@@ -74,12 +74,8 @@ include("plot_results.jl")
 		end
 		#UPDATE
 
-		@views flux_diff .= diff(flux[1, :])
-		h[2:end-1] .-= dt ./ dx .* flux_diff
-		#h[2:end-1] .-= dt ./ dx .* (diff(flux[1, :]))
-		@views flux_diff .= diff(flux[2, :])
-		q[2:end-1] .-= dt ./ dx .* flux_diff
-		#q[2:end-1] .-= dt ./ dx .* (diff(flux[2, :]))
+		h[2:end-1] .-= dt ./ dx .* (diff(flux[1, :]))
+		q[2:end-1] .-= dt ./ dx .* (diff(flux[2, :]))
 		u = @. q / h
 
 		# Exit the loop if timeout_reached is true
